@@ -12,13 +12,19 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 let win
 
 // Scheme must be registered before the app is ready
-protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true, standard: true } }])
+protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600, webPreferences: {
-    nodeIntegration: true
-  } })
+  win = new BrowserWindow({
+    // frame: false,
+    resizable: false,
+    width: 950,
+    height: 550,
+    webPreferences: {
+      nodeIntegration: true,
+    }
+  })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -33,7 +39,9 @@ function createWindow () {
   win.on('closed', () => {
     win = null
   })
+  win.setMenuBarVisibility(false)
 }
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

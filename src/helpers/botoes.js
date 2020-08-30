@@ -1,0 +1,76 @@
+const teclas = [
+  [
+    { label: ['"', '\''], tecla: 192 },
+    { label: ['!', '1'], tecla: 49 },
+    { label: ['@', '2'], tecla: 50 },
+    { label: ['#', '3'], tecla: 51 },
+    { label: ['$', '4'], tecla: 52 },
+    { label: ['%', '5'], tecla: 53 },
+    { label: ['¨', '6'], tecla: 54 },
+    { label: ['&', '7'], tecla: 55 },
+    { label: ['*', '8'], tecla: 56 },
+    { label: ['(', '9'], tecla: 57 },
+    { label: [')', '0'], tecla: 48 },
+    { label: ['_', '-'], tecla: 189 },
+    { label: ['+', '='], tecla: 187 },
+    { label: ['}', ']'], tecla: 220 },
+    { label: ['Backspace'], tecla: 8, classe: 'backspace' }
+  ],
+  [
+    { label: ['Tab'], tecla: 9, classe: 'tab' },
+    { label: ['Q'], tecla: 81 },
+    { label: ['W'], tecla: 87 },
+    { label: ['E'], tecla: 69 },
+    { label: ['R'], tecla: 82 },
+    { label: ['T'], tecla: 84 },
+    { label: ['Y'], tecla: 89 },
+    { label: ['U'], tecla: 85 },
+    { label: ['I'], tecla: 73 },
+    { label: ['O'], tecla: 79 },
+    { label: ['P'], tecla: 80 },
+    { label: ['`', '´'], tecla: 219 },
+    { label: ['{', '['], tecla: 221, style: 'width: 116px' }
+  ],
+  [
+    { label: ['Capslock'], tecla: 20, classe: 'caps' },
+    { label: ['A'], tecla: 65 },
+    { label: ['S'], tecla: 83 },
+    { label: ['D'], tecla: 68 },
+    { label: ['F'], tecla: 70 },
+    { label: ['G'], tecla: 71 },
+    { label: ['H'], tecla: 72 },
+    { label: ['J'], tecla: 74 },
+    { label: ['K'], tecla: 75 },
+    { label: ['L'], tecla: 76 },
+    { label: ['Ç'], tecla: 186 },
+    { label: ['^', '~'], tecla: 222 },
+    { label: ['Enter'], tecla: 13, classe: 'enter' }
+  ],
+  [
+    { label: ['Shift'], tecla: 16, classe: 'shift' },
+    { label: ['|', '\\'], tecla: 220 },
+    { label: ['Z'], tecla: 90 },
+    { label: ['X'], tecla: 88 },
+    { label: ['C'], tecla: 67 },
+    { label: ['V'], tecla: 86 },
+    { label: ['B'], tecla: 66 },
+    { label: ['N'], tecla: 78 },
+    { label: ['M'], tecla: 77 },
+    { label: ['<', ','], tecla: 188 },
+    { label: ['>', '.'], tecla: 190 },
+    { label: [':', ';'], tecla: 191 },
+    { label: ['?', '/'], tecla: 191, },
+    { label: ['Shift'], tecla: 16, classe: 'shift', left: false }
+  ],
+  [
+    { label: ['Ctrl'], tecla: 17, classe: 'other' },
+    { label: ['Win'], tecla: null, classe: 'other' },
+    { label: ['Alt'], tecla: 18, classe: 'other' },
+    { label: ['Space'], tecla: 32, classe: 'other space' },
+    { label: ['Alt Gr'], tecla: 225, classe: 'other' },
+    { label: ['Win'], tecla: null, classe: 'other' },
+    { label: ['Ctrl'], tecla: 17, classe: 'other', left: false },
+  ]
+]
+
+export default teclas
