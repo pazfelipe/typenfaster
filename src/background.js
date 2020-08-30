@@ -1,6 +1,7 @@
 'use strict'
 
 import { app, protocol, BrowserWindow } from 'electron'
+import path from 'path'
 import {
   createProtocol,
   /* installVueDevtools */
@@ -21,6 +22,7 @@ function createWindow() {
     resizable: false,
     width: 950,
     height: 550,
+    icon: path.join(__static, "icon-1.png"),
     webPreferences: {
       nodeIntegration: true,
     }

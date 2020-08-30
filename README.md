@@ -1,24 +1,12 @@
-# typenfaster
+# TypeN Faster
 
-## Project setup
-```
-yarn install
-```
+## Todo
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [ ] Finalizar menu superior
+- [ ] Popular banco SQLite
+- [ ] Nivelar palavras
+- [ ] Nivelas frases
+- [ ] Salvar configurações do usuário
+- [ ] Exportar resultados
+- [ ] Nivel tempo de escrita
+- [ ] Modal mão indicadora 

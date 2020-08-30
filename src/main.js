@@ -5,6 +5,10 @@ import router from './router'
 
 import './assets/css/app.scss'
 
+import TIcon from './components/TIcon.vue'
+
+Vue.component('TIcon', TIcon)
+
 Vue.config.productionTip = false
 
 new Vue({

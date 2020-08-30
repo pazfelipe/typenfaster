@@ -4,21 +4,67 @@
     :class="toggleDarkMode ? 'dark' : ''"
   >
     <header class="header">
-      <div>
+      <div
+        class="container-toggle"
+        :class="toggleDarkMode ? 'dark' : ''"
+        style="margin-right: 10px;"
+      >
         <label for="toggle">Modo escuro</label>
         <input
+          id="toggle"
           ref="toggleDark"
           type="checkbox"
           v-model="toggleDarkMode"
         />
+      </div>
+      <div
+        class="container-toggle"
+        :class="toggleDarkMode ? 'dark' : ''"
+      >
+        <label for="tooltip">Mostrar dica</label>
+        <input
+          id="tooltip"
+          ref="tooltip"
+          type="checkbox"
+          v-model="tooltip"
+        />
+      </div>
+      <div style="margin-left: auto; min-width: 155px; display: flex; justify-content: space-between;">
         <button
+          class="t-btn"
           @click="start = true"
           v-if="!start"
-        >Iniciar</button>
+        >
+          <span>Iniciar</span>
+          <t-icon
+            name="las la-flag-checkered"
+            color="black"
+            size="24px"
+          ></t-icon>
+        </button>
         <button
+          class="t-btn"
           @click="reiniciar"
           v-else
-        >Reiniciar</button>
+        >
+          <span>Reiniciar</span>
+          <t-icon
+            name="las la-redo-alt"
+            color="black"
+            size="24px"
+          ></t-icon>
+        </button>
+        <button
+          style="background-color: tomato;"
+          class="t-btn"
+          @click="fechaAplicacao"
+        >
+          <t-icon
+            name="las la-power-off"
+            color="#fff"
+            size="24px"
+          ></t-icon>
+        </button>
       </div>
     </header>
     <main class="main">
@@ -66,7 +112,9 @@
               :tecla-digitada="tecla"
               :tecla-ativa="teclaAtiva"
               :left="botao.left"
+              :dedo="botao.dedo"
               :start="start"
+              :tooltip-ativa="tooltip"
             />
           </div>
         </section>
@@ -188,7 +236,8 @@ export default {
       incPalavra: 0,
       incLetra: 0,
       start: false,
-      timer: null
+      timer: null,
+      tooltip: false
     }
   },
   filters: {
@@ -214,7 +263,12 @@ export default {
       handler() {
         this.$refs.toggleDark.blur()
       }
-    }
+    },
+    tooltip: {
+      handler() {
+        this.$refs.tooltip.blur()
+      }
+    },
   },
   beforeMount() {
     this.palavras = [...words]
@@ -262,7 +316,7 @@ export default {
         this.palavras[pl].errado.push(event.key)
       }
 
-      console.log(event.keyCode, event.key)
+      // console.log(event.keyCode, event.key)
     },
     reseta() {
       this.palavras[this.incPalavra].digitado = []
@@ -277,6 +331,11 @@ export default {
       this.timer = null
       this.palavras[this.incPalavra].tempo = 0
       document.activeElement.blur()
+    },
+    fechaAplicacao() {
+      const remote = require('electron').remote
+      let w = remote.getCurrentWindow()
+      w.close()
     }
   }
 }
