@@ -222,6 +222,8 @@
 import BotaoTeclado from '@/components/Botao'
 import btns from '../helpers/botoes'
 import words from '../temp/data'
+import { update } from '../core/services/Configuracoes.Services'
+
 
 export default {
   name: 'HomePage',
@@ -262,11 +264,13 @@ export default {
     toggleDarkMode: {
       handler() {
         this.$refs.toggleDark.blur()
+        this.updateConfiguracoes()
       }
     },
     tooltip: {
       handler() {
         this.$refs.tooltip.blur()
+        this.updateConfiguracoes()
       }
     },
   },
@@ -283,8 +287,11 @@ export default {
       this.tecla = null
     },
     mapeandoTeclas(event) {
+      console.log(event.keyCode, event.key)
       if (!this.start) return
       // event.preventDefault()
+
+
       this.tecla = event.keyCode
       this.start = true
 
@@ -316,7 +323,7 @@ export default {
         this.palavras[pl].errado.push(event.key)
       }
 
-      // console.log(event.keyCode, event.key)
+
     },
     reseta() {
       this.palavras[this.incPalavra].digitado = []
@@ -336,6 +343,13 @@ export default {
       const remote = require('electron').remote
       let w = remote.getCurrentWindow()
       w.close()
+    },
+    async updateConfiguracoes() {
+      const result = await update({
+        modoNoturno: this.toggleDarkMode,
+        mostrarDicas: this.tooltip
+      })
+      console.log(result)
     }
   }
 }

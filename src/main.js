@@ -7,6 +7,9 @@ import './assets/css/app.scss'
 
 import TIcon from './components/TIcon.vue'
 
+
+import './core/database/connection'
+
 Vue.component('TIcon', TIcon)
 
 Vue.config.productionTip = false
