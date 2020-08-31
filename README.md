@@ -2,7 +2,9 @@
 
 ## Todo
 
-- [ ] Finalizar menu superior
+- [ ] Finalizar menu configurações
+- [ ] Criar modal configurações
+- [ ] Conexão com banco SQLite
 - [ ] Popular banco SQLite
 - [ ] Nivelar palavras
 - [ ] Nivelas frases
