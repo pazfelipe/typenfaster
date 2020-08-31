@@ -1,8 +1,15 @@
+import path from 'path'
+import {remote} from 'electron'
+
+const filePath = process.env.NODE_ENV === 'development'
+  ? process.cwd().concat('/src/core/database')
+  : remote.app.getPath('userData')
+
 const knex = require('knex')({
   client: 'sqlite3',
   useNullAsDefault: true,
   connection: {
-    filename: './db.sqlite'
+    filename: path.join(filePath, 'db.sqlite')
   }
 })
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 'use strict'
 
 import { app, protocol, BrowserWindow } from 'electron'
@@ -11,6 +12,8 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+
+
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }])
