@@ -1,12 +1,12 @@
 <template>
   <div
     class="container"
-    :class="toggleDarkMode ? 'dark' : ''"
+    :class="theme"
   >
     <header class="header">
       <div
         class="container-toggle"
-        :class="toggleDarkMode ? 'dark' : ''"
+        :class="theme"
         style="margin-right: 10px;"
       >
         <label for="toggle">Modo escuro</label>
@@ -15,11 +15,12 @@
           ref="toggleDark"
           type="checkbox"
           v-model="toggleDarkMode"
+          @change="toggleTheme"
         />
       </div>
       <div
         class="container-toggle"
-        :class="toggleDarkMode ? 'dark' : ''"
+        :class="theme"
       >
         <label for="tooltip">Mostrar dica</label>
         <input
@@ -70,7 +71,7 @@
     <main class="main">
       <div
         class="header"
-        :class="toggleDarkMode ? 'dark' : ''"
+        :class="theme"
       >
 
         <div v-if="start">
@@ -93,7 +94,7 @@
       </div>
       <div
         class="container-teclado"
-        :class="toggleDarkMode ? 'dark' : ''"
+        :class="theme"
       >
         <section>
           <div
@@ -209,10 +210,18 @@
       </div>
       <div
         class="bottom"
-        :class="toggleDarkMode ? 'dark' : ''"
+        :class="theme"
       >
         Letras digitadas erradas: {{palavras[incPalavra].errado.length}}
       </div>
+      <footer class="footer">
+        <button @click="showModal">
+          <t-icon
+            name="las la-cogs"
+            size="30px"
+          ></t-icon>
+        </button>
+      </footer>
     </main>
   </div>
 </template>
@@ -224,6 +233,7 @@ import btns from '../helpers/botoes'
 import words from '../temp/data'
 import { update } from '../core/services/Configuracoes.Services'
 
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'HomePage',
@@ -248,6 +258,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getTheme']),
+    theme() {
+      return this.toggleDarkMode ? 'dark' : ''
+    },
     segundo() {
       return 's'
     },
@@ -261,12 +275,6 @@ export default {
     },
   },
   watch: {
-    toggleDarkMode: {
-      handler() {
-        this.$refs.toggleDark.blur()
-        this.updateConfiguracoes()
-      }
-    },
     tooltip: {
       handler() {
         this.$refs.tooltip.blur()
@@ -276,6 +284,10 @@ export default {
   },
   beforeMount() {
     this.palavras = [...words]
+    this.getThemeFromDB()
+      .then(() => {
+        this.toggleDarkMode = this.getTheme
+      })
   },
   mounted() {
     this.start = false
@@ -283,6 +295,7 @@ export default {
     window.addEventListener('keyup', this.limpaTecla)
   },
   methods: {
+    ...mapActions(['setTheme', 'getThemeFromDB']),
     limpaTecla() {
       this.tecla = null
     },
@@ -345,11 +358,18 @@ export default {
       w.close()
     },
     async updateConfiguracoes() {
-      const result = await update({
+      await update({
         modoNoturno: this.toggleDarkMode,
         mostrarDicas: this.tooltip
       })
-      console.log(result)
+    },
+    showModal() {
+      alert('Vai ser mostrada a modal aqui')
+    },
+    toggleTheme() {
+      this.$refs.toggleDark.blur()
+      this.setTheme(this.toggleDarkMode)
+      this.updateConfiguracoes()
     }
   }
 }

@@ -7,6 +7,7 @@ import './assets/css/app.scss'
 
 import TIcon from './components/TIcon.vue'
 
+import './boot'
 
 import './core/database/connection'
 

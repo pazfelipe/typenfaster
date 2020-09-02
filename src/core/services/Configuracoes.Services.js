@@ -34,3 +34,8 @@ export const update = async data => {
     console.log(error)
   }
 }
+
+export const getConfigs = async () => {
+  const Model = new Configuracoes()
+  return await Model.getConfiguracoes()
+}
