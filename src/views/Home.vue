@@ -96,140 +96,31 @@
         class="container-teclado"
         :class="theme"
       >
-        <section>
-          <div
-            style="width: 100%; height: 100%"
-            class="row"
-            v-for="(btns, indice) in botoes"
-            :key="indice"
-          >
-            <botao-teclado
-              v-for="(botao, i) in btns"
-              :key="i"
-              :labels="botao.label"
-              :tecla="botao.tecla"
-              :class="botao.classe"
-              :style="botao.style"
-              :tecla-digitada="tecla"
-              :tecla-ativa="teclaAtiva"
-              :left="botao.left"
-              :dedo="botao.dedo"
-              :start="start"
-              :tooltip-ativa="tooltip"
-            />
-          </div>
-        </section>
-        <!-- <section style="background-color: red">
-          <div
-            style="background-color: brown; width: 100%; height: 100%; justify-content: center"
-            class="row"
-          >
-            <button class="btn"><span>Ctrl</span></button>
-            <button class="btn"><span>Win</span></button>
-            <button class="btn"><span>Alt</span></button>
-          </div>
-          <div
-            style="background-color: brown; width: 100%; height: 100%; justify-content: center"
-            class="row"
-          >
-            <button class="btn"><span>Ctrl</span></button>
-            <button class="btn"><span>Win</span></button>
-            <button class="btn"><span>Alt</span></button>
-          </div>
-          <div
-            style="background-color: brown; width: 100%; height: 100%; justify-content: center"
-            class="row"
-          >
-            <button class="btn"><span>Ctrl</span></button>
-            <button class="btn"><span>Win</span></button>
-            <button class="btn"><span>Alt</span></button>
-          </div>
-          <div
-            style="background-color: brown; width: 100%; height: 100%; justify-content: center"
-            class="row"
-          >
-            <button class="btn"><span>Alt</span></button>
-          </div>
-          <div
-            style="background-color: brown; width: 100%; height: 100%; justify-content: center"
-            class="row"
-          >
-            <button class="btn"><span>Ctrl</span></button>
-            <button class="btn"><span>Win</span></button>
-            <button class="btn"><span>Alt</span></button>
-          </div>
-        </section> -->
-        <section>
-          <div
-            style="width: 100%; height: 100%; justify-content: space-between"
-            class="row"
-          >
-            <button class="btn"><span>Num</span> <span>Lock</span> </button>
-            <button class="btn"><span>/</span></button>
-            <button class="btn"><span>*</span></button>
-            <button class="btn"><span>-</span></button>
-          </div>
-          <div
-            style="width: 100%; height: 100%; justify-content: space-between"
-            class="row"
-          >
-            <button class="btn"><span>7</span></button>
-            <button class="btn"><span>8</span></button>
-            <button class="btn"><span>9</span></button>
-            <button class="btn"><span>+</span></button>
-          </div>
-          <div
-            style="width: 100%; height: 100%; justify-content: space-between"
-            class="row"
-          >
-            <button class="btn"><span>4</span></button>
-            <button class="btn"><span>5</span></button>
-            <button class="btn"><span>6</span></button>
-            <button class="btn"><span>.</span></button>
-          </div>
-          <div
-            style="width: 100%; height: 100%; justify-content: space-between; align-items: flex-start"
-            class="row"
-          >
-            <button class="btn"><span>1</span></button>
-            <button class="btn"><span>2</span></button>
-            <button class="btn"><span>3</span></button>
-            <button class="btn num-enter"><span>Enter</span></button>
-          </div>
-          <div
-            style="width: 127px; height: 100%; justify-content: space-between;margin-top: -29px;"
-            class="row"
-          >
-            <button
-              class="btn"
-              style="width: 75px;"
-            ><span>0</span></button>
-            <button class="btn"><span>,</span></button>
-          </div>
-        </section>
+        <TecladoAlfa
+          :btns="btns"
+          :botoes="botoes"
+          :start="start"
+          :tecla="tecla"
+          :tooltip="tooltip"
+          :tecla-ativa="teclaAtiva"
+        />
+
+        <TecladoNumerico />
+
       </div>
-      <div
-        class="bottom"
-        :class="theme"
-      >
-        Letras digitadas erradas: {{palavras[incPalavra].errado.length}}
-      </div>
-      <footer class="footer">
-        <button @click="showModal">
-          <t-icon
-            name="las la-cogs"
-            size="30px"
-          ></t-icon>
-        </button>
-      </footer>
+      <LetrasDigitadas :letras="palavras[incPalavra].errado.length" />
+      <Footer />
     </main>
   </div>
 </template>
 
 <script>
 
-import BotaoTeclado from '@/components/Botao'
 import btns from '../helpers/botoes'
+import TecladoAlfa from '@/components/TecladoAlfa'
+import TecladoNumerico from '@/components/TecladoNumerico'
+import LetrasDigitadas from '@/components/LetrasDigitadas'
+import Footer from '@/components/Footer'
 import words from '../temp/data'
 import { update } from '../core/services/Configuracoes.Services'
 
@@ -237,7 +128,12 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'HomePage',
-  components: { BotaoTeclado },
+  components: {
+    TecladoAlfa,
+    TecladoNumerico,
+    LetrasDigitadas,
+    Footer
+  },
   data() {
     return {
       tecla: null,
@@ -362,9 +258,6 @@ export default {
         modoNoturno: this.toggleDarkMode,
         mostrarDicas: this.tooltip
       })
-    },
-    showModal() {
-      alert('Vai ser mostrada a modal aqui')
     },
     toggleTheme() {
       this.$refs.toggleDark.blur()
